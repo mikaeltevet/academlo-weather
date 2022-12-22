@@ -41,7 +41,6 @@ button[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding: 1rem;
 }
 
 button[type="submit"]:hover {
