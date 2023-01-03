@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Card, CardContent, CardMedia } from '@mui/material';
-import '../WeatherData.css'
+import './WeatherData.css'
 
 const WeatherData = () => {
   const [temperature, setTemperature] = useState(null);
