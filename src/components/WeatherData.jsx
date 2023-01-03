@@ -44,7 +44,7 @@ const WeatherData = () => {
   }, []);
 
   return (
-    <Card>
+    <Card className="WeatherData-card">
       <CardContent>
         {error ? (
           // If there was an error, display an error message
@@ -54,18 +54,21 @@ const WeatherData = () => {
         ) : weather ? (
           // If the weather data was successfully fetched, display it
           <>
-            <Typography variant="h5" component="h2">
+            <Typography variant="h5" component="h2" className="WeatherData-location">
               {weather.city}, {weather.country}
             </Typography>
             <CardMedia
               component="img"
               alt={weather.description}
-              height="140"
+              className="WeatherData-icon"
               image={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
               title={weather.description}
             />
-            <Typography variant="h5" component="h2">
-              Temperature: {temperature}°C
+            <Typography variant="h5" component="h2" className="WeatherData-description">
+              {weather.description}
+            </Typography>
+            <Typography variant="h5" component="h2" className="WeatherData-temp">
+              Temperature: {temperature} °C
             </Typography>
           </>
         ) : (
