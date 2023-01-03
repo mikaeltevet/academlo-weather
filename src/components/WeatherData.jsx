@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Card, CardContent } from '@material-ui/core';
 
-const WeatherApp = () => {
+const WeatherData = () => {
   const [temperature, setTemperature] = useState(null);
   const [error, setError] = useState(null);
 
@@ -60,4 +60,4 @@ const WeatherApp = () => {
   );
 };
 
-export default WeatherApp;
+export default WeatherData;
