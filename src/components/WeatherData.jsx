@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Card, CardContent } from '@mui/material/';
+import { Typography, Card, CardContent, CardMedia } from '@mui/material';
 
 const WeatherData = () => {
   const [temperature, setTemperature] = useState(null);
+  const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -19,8 +20,14 @@ const WeatherData = () => {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            // Extract the temperature from the API response and store it in the component's state
+            // Extract the temperature and weather data from the API response and store it in the component's state
             setTemperature(data.main.temp);
+            setWeather({
+              icon: data.weather[0].icon,
+              description: data.weather[0].description,
+              city: data.name,
+              country: data.sys.country,
+            });
           })
           .catch((error) => {
             console.error(error);
@@ -44,11 +51,23 @@ const WeatherData = () => {
           <Typography variant="h5" component="h2" color="error">
             Error: {error.message}
           </Typography>
-        ) : temperature ? (
-          // If the temperature data was successfully fetched, display it
-          <Typography variant="h5" component="h2">
-            Temperature: {temperature}°C
-          </Typography>
+        ) : weather ? (
+          // If the weather data was successfully fetched, display it
+          <>
+            <Typography variant="h5" component="h2">
+              {weather.city}, {weather.country}
+            </Typography>
+            <CardMedia
+              component="img"
+              alt={weather.description}
+              height="140"
+              image={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+              title={weather.description}
+            />
+            <Typography variant="h5" component="h2">
+              Temperature: {temperature}°C
+            </Typography>
+          </>
         ) : (
           // If the data is still being fetched, display a loading message
           <Typography variant="h5" component="h2">
