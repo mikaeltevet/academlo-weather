@@ -73,7 +73,6 @@ const WeatherData = () => {
             <CardMedia
               component="img"
               alt={weather.description}
-              height="3rem"
               className="WeatherData-icon"
               image={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
               title={weather.description}
