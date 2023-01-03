@@ -61,7 +61,7 @@ const WeatherData = () => {
               component="img"
               alt={weather.description}
               height="140"
-              image={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+              image={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
               title={weather.description}
             />
             <Typography variant="h5" component="h2">
