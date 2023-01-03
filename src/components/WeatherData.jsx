@@ -1,44 +1,63 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Typography, Card, CardContent } from '@material-ui/core';
 
-function WeatherData() {
-  const [city, setCity] = useState('');
-  const [weather, setWeather] = useState({});
+const WeatherApp = () => {
+  const [temperature, setTemperature] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // Extract the latitude and longitude from the geolocation data
+        const { latitude, longitude } = position.coords;
+        console.log(`Latitude: ${latitude} Longitude: ${longitude}`);
 
-    const API_KEY = 'c2b1e5dfd28696987ebf50ef0057756e';
-    const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-
-    const response = await axios.get(API_URL);
-    const data = response.data;
-
-    setWeather({
-      temperature: data.main.temp,
-      humidity: data.main.humidity,
-      wind: data.wind.speed
-    });
-  };
+        // Fetch the weather data from the OpenWeatherMap API
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=c2b1e5dfd28696987ebf50ef0057756e&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            // Extract the temperature from the API response and store it in the component's state
+            setTemperature(data.main.temp);
+          })
+          .catch((error) => {
+            console.error(error);
+            // If there was an error fetching the data, store it in the component's state
+            setError(error);
+          });
+      },
+      (error) => {
+        console.error(error);
+        // If there was an error getting the user's location, store it in the component's state
+        setError(error);
+      }
+    );
+  }, []);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          City:
-          <input type="text" value={city} onChange={(event) => setCity(event.target.value)} />
-        </label>
-        <button type="submit">Get Weather</button>
-      </form>
-      { weather.temperature && (
-        <div>
-          <p>Temperature: {weather.temperature}</p>
-          <p>Humidity: {weather.humidity}</p>
-          <p>Wind Speed: {weather.wind}</p>
-        </div>
-      ) }
-    </div>
+    <Card>
+      <CardContent>
+        {error ? (
+          // If there was an error, display an error message
+          <Typography variant="h5" component="h2" color="error">
+            Error: {error.message}
+          </Typography>
+        ) : temperature ? (
+          // If the temperature data was successfully fetched, display it
+          <Typography variant="h5" component="h2">
+            Temperature: {temperature}°C
+          </Typography>
+        ) : (
+          // If the data is still being fetched, display a loading message
+          <Typography variant="h5" component="h2">
+            Loading...
+          </Typography>
+        )}
+      </CardContent>
+    </Card>
   );
-}
+};
 
-export default WeatherData;
+export default WeatherApp;
