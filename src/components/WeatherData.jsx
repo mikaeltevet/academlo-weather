@@ -79,8 +79,7 @@ const WeatherData = () => {
                   {weather.description}
                 </Typography>
                 <Typography variant="h5" component="h2" className="WeatherData-temp">
-                  Temperature: {temperature}°{units === 'metric' ? 'C' :
-              'F'}
+                  Temperature: {temperature} °{units === 'metric' ? 'C' : 'F'}
               </Typography>
               <FormControlLabel
                 control={
@@ -103,6 +102,7 @@ const WeatherData = () => {
         </CardContent>
       </Card>
     );
-  })};
+  });
+};
   
   export default WeatherData;
