@@ -48,7 +48,8 @@ const WeatherData = () => {
         console.error(error);
         // If there was an error getting the user's location, store it in the component's state
         setError(error);
-      });
+      }
+    );
 
       const handleUnitsChange = (event) => {
         setUnits(event.target.checked ? 'imperial' : 'metric');
@@ -101,8 +102,8 @@ const WeatherData = () => {
           )}
         </CardContent>
       </Card>
-    );
+      );
   });
 };
   
-  export default WeatherData;
+export default WeatherData;
