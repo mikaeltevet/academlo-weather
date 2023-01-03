@@ -50,48 +50,49 @@ const WeatherData = () => {
         setError(error);
       }
     );
+  }, [units]);
 
-      const handleUnitsChange = (event) => {
-        setUnits(event.target.checked ? 'imperial' : 'metric');
-      };
-    
-      return (
-        <Card className="WeatherData-card">
-          <CardContent>
-            {error ? (
-              // If there was an error, display an error message
-              <Typography variant="h5" component="h2" color="error">
-                Error: {error.message}
-              </Typography>
-            ) : weather ? (
-              // If the weather data was successfully fetched, display it
-              <>
-                <Typography variant="h5" component="h2" className="WeatherData-location">
-                  {weather.city}, {weather.country}
-                </Typography>
-                <CardMedia
-                  component="img"
-                  alt={weather.description}
-                  className="WeatherData-icon"
-                  image={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                  title={weather.description}
+  const handleUnitsChange = (event) => {
+    setUnits(event.target.checked ? 'imperial' : 'metric');
+  };
+
+  return (
+    <Card className="WeatherData-card">
+      <CardContent>
+        {error ? (
+          // If there was an error, display an error message
+          <Typography variant="h5" component="h2" color="error">
+            Error: {error.message}
+          </Typography>
+        ) : weather ? (
+          // If the weather data was successfully fetched, display it
+          <>
+            <Typography variant="h5" component="h2" className="WeatherData-location">
+              {weather.city}, {weather.country}
+            </Typography>
+            <CardMedia
+              component="img"
+              alt={weather.description}
+              className="WeatherData-icon"
+              image={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+              title={weather.description}
+            />
+            <Typography variant="h5" component="h2" className="WeatherData-description">
+              {weather.description}
+            </Typography>
+            <Typography variant="h5" component="h2" className="WeatherData-temp">
+              Temperature: {temperature} °{units === 'metric' ? 'C' : 'F'}
+            </Typography>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={units === 'imperial'}
+                  onChange={handleUnitsChange}
+                  name="units"
+                  color="primary"
                 />
-                <Typography variant="h5" component="h2" className="WeatherData-description">
-                  {weather.description}
-                </Typography>
-                <Typography variant="h5" component="h2" className="WeatherData-temp">
-                  Temperature: {temperature} °{units === 'metric' ? 'C' : 'F'}
-              </Typography>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={units === 'imperial'}
-                    onChange={handleUnitsChange}
-                    name="units"
-                    color="primary"
-                  />
-                }
-                label={units === 'metric' ? 'Show Fahrenheit' : 'Show Celsius'}
+              }
+              label={units === 'metric' ? 'Show Fahrenheit' : 'Show Celsius'}
               />
             </>
           ) : (
@@ -102,8 +103,7 @@ const WeatherData = () => {
           )}
         </CardContent>
       </Card>
-      );
-  });
-};
+    );
+  };
   
-export default WeatherData;
+  export default WeatherData;  
