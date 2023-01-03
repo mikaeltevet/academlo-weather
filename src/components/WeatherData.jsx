@@ -106,4 +106,4 @@ const WeatherData = () => {
     );
   };
   
-  export default WeatherData;  
+  export default WeatherData;
