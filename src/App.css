@@ -5,40 +5,45 @@
   text-align: center;
 }
 
-.WeatherData {
+body {
+  font-family: sans-serif;
+  width: 100%;
+  margin: auto;
+}
+
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 16px;
+  margin: 20px 0;
 }
 
-.WeatherData-card {
-  width: 400px;
-  text-align: center;
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
-.WeatherData-temp {
-  font-size: 48px;
-  margin: 16px;
-  color: tomato;
+input[type="text"] {
+  width: 200px;
+  height: 30px;
+  font-size: 16px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.WeatherData-location {
-  font-size: 24px;
-  margin: 8px;
-  color: steelblue;
+button[type="submit"] {
+  width: 8rem;
+  font-size: 16px;
+  background-color: #00b8d4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.WeatherData-description {
-  font-size: 18px;
-  margin: 8px;
-  color: grey;
-}
-
-.WeatherData-icon {
-  width: 128px;
-  height: 128px;
-  object-fit: cover;
-  margin: 8px;
-  border-radius: 50%;
+button[type="submit"]:hover {
+  background-color: #0052cc;
 }
